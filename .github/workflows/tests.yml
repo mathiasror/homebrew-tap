@@ -8,6 +8,14 @@ on:
 permissions:
   contents: read
 
+env:
+  # GitHub's Ubuntu 24.04 runner turns on Homebrew's Linux sandbox, which
+  # needs rootless Bubblewrap — but noble blocks unprivileged user
+  # namespaces via AppArmor, so `bwrap` can't create the sandbox and
+  # `brew test-bot --only-setup` aborts. Disable the Linux sandbox in CI
+  # (Homebrew's own documented fallback). No effect on macOS.
+  HOMEBREW_NO_SANDBOX_LINUX: 1
+
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -23,13 +31,6 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@main
-
-      # Homebrew enables HOMEBREW_SANDBOX_LINUX on the GitHub-hosted Ubuntu
-      # image but `bwrap` isn't preinstalled, so `brew test-bot --only-setup`
-      # aborts without it. Not needed on macOS (no Linux sandbox there).
-      - name: Install Bubblewrap (Linux sandbox dependency)
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y bubblewrap
 
       - name: Cache Homebrew Bundler RubyGems
         uses: actions/cache@v4
