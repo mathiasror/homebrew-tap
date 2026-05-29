@@ -22,7 +22,14 @@ jobs:
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
+
+      # Homebrew enables HOMEBREW_SANDBOX_LINUX on the GitHub-hosted Ubuntu
+      # image but `bwrap` isn't preinstalled, so `brew test-bot --only-setup`
+      # aborts without it. Not needed on macOS (no Linux sandbox there).
+      - name: Install Bubblewrap (Linux sandbox dependency)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y bubblewrap
 
       - name: Cache Homebrew Bundler RubyGems
         uses: actions/cache@v4
