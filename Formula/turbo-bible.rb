@@ -10,15 +10,15 @@ class TurboBible < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/mathiasror/turbo-bible/releases/download/v0.1.0/turbo-bible-aarch64-apple-darwin.tar.gz"
-      sha256 "a35f242431ab9717f8568c211c9b0c1d8c90bce7e82401c8d6fe05fd98c0ecfa"
+      url "https://github.com/mathiasror/turbo-bible/releases/download/v0.2.0/turbo-bible-aarch64-apple-darwin.tar.gz"
+      sha256 "3bec244ca07ce94f4f7b4cc3297f1e8a80a3376aeca973ccd8c745be6669b5e5"
     end
     on_intel do
       # No prebuilt binary for Intel macOS — source-build from the crates.io
       # tarball, which (unlike the GitHub tag tarball) ships the bundled KJV
       # asset via Cargo.toml's `include = [...]` whitelist.
-      url "https://static.crates.io/crates/turbo-bible/turbo-bible-0.1.0.crate"
-      sha256 "c56716098ee83c70bc66d0323fab112570c1569f4e9b1a2b988a079d8088847e"
+      url "https://static.crates.io/crates/turbo-bible/turbo-bible-0.2.0.crate"
+      sha256 "d0abd25a65b631aac607b84fad71981f15394529f7fda256b94d9d63a3b14dc4"
 
       depends_on "rust" => :build
     end
@@ -26,12 +26,12 @@ class TurboBible < Formula
 
   on_linux do
     on_arm do
-      url "https://github.com/mathiasror/turbo-bible/releases/download/v0.1.0/turbo-bible-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "5a75e11f8a6e61a4eb78c135c777b74443dac2213a1b683d09d27ecf0f9080dd"
+      url "https://github.com/mathiasror/turbo-bible/releases/download/v0.2.0/turbo-bible-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "b5d746299752492c08e6346f68de94641a85854dddedc40039265f39d4d6a0a3"
     end
     on_intel do
-      url "https://github.com/mathiasror/turbo-bible/releases/download/v0.1.0/turbo-bible-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "baf67400c47a8be51619e5cddc575132b64420e77a321b14dde197c04c64e1b5"
+      url "https://github.com/mathiasror/turbo-bible/releases/download/v0.2.0/turbo-bible-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "1caf352b66d27b498a14bcc00ee254bc5d8d2ad9d701a3d359459c9b74cac663"
     end
   end
 
